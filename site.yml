@@ -1,0 +1,13 @@
+---
+- name: Configuracion VM - PC5
+  hosts: all
+  become: yes
+  become_method: sudo
+  remote_user: vagrant
+  tasks:
+    - import_tasks: ansible/ejercicio1/main.yml
+    - import_tasks:
+    - import_tasks:
+    - import_tasks:
+    - import_tasks:
+    - import_tasks:

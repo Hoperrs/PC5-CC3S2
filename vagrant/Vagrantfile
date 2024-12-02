@@ -1,0 +1,19 @@
+# Ubuntu 20.04
+config.vm.box = "ubuntu/focal64"
+
+
+# 2GB de memoria RAM
+config.vm.provider "virtualbox" do |vb|
+  vb.memory = "2048"
+  vb.name = "vm_iac"
+end
+
+
+# red privada con ip estática
+config.vm.network "private_network", ip: "192.168.50.4"
+
+
+# provisión con Ansible usando el playbook site.yml
+config.vm.provision "ansible" do |ansible|
+  ansible.playbook = "site.yml"
+end
