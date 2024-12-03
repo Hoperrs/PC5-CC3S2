@@ -1,0 +1,21 @@
+---
+- name: Instalar dependencias de Python
+  apt:
+    name: python3-pip
+    state: present
+
+- name: Instalar Flask y Gunicorn
+  pip:
+    update_cache: yes
+    name:
+      - Flask
+      - Gunicorn
+    state: present
+
+
+- name: Configurar Nginx para utilizar SSL
+  
+
+
+- name: Habilitar y configurar el firewall UFW para permitir tráfico en los puertos necesarios
+  

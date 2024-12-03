@@ -1,0 +1,15 @@
+---
+- name: Instalar Nginx
+  apt:
+    name: nginx
+    state: present
+
+# - name: Generar certificados SSL autofirmados
+
+
+- name: Configurar Nginx para utilizar SSL
+  
+
+
+- name: Habilitar y configurar el firewall UFW para permitir tráfico en los puertos necesarios
+  
