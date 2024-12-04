@@ -4,12 +4,29 @@
     name: nginx
     state: present
 
-# - name: Generar certificados SSL autofirmados
+
+- name: Generar certificados SSL autofirmados
+  command: |
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/ssl/private/nginx-selfsigned.key \
+    -out /etc/ssl/certs/nginx-selfsigned.crt \
+    -subj "/CN=localhost"
 
 
 - name: Configurar Nginx para utilizar SSL
-  
+  template:
+    src: nginx_config.j2
+    dest: /etc/nginx/sites-available/default
 
 
 - name: Habilitar y configurar el firewall UFW para permitir tráfico en los puertos necesarios
-  
+  block:
+    - name: Permitir tráfico en el puerto 443 (HTTPS)
+      ufw:
+        rule: allow
+        port: 443
+        proto: tcp
+
+    - name: Activar UFW
+      ufw:
+        state: enabled

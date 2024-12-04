@@ -4,18 +4,23 @@
     update_cache: yes
     state: present
 
-# - name: Configurar la zona horaria y locales
-#   timezone:
-#     name: America/Peru/Lima
 
-# - name: Crear un grupo llamado admin
-#   group:
-#     name: admin
-#     state: present
+- name: Configurar la zona horaria y locales
+  shell: |
+    timedatectl set-timezone America/Lima
+    locale-gen es_PE.UTF-8
+    update-locale LANG=es_PE.UTF-8 LC_ALL=es_PE.UTF-8
 
-# - name: Crear un usuario devuser perteneciente al grupo admin con contraseña cifrada
-#   user:
-#     name: devuser
-#     shell: /bin/bash
-#     group: admin
-#     password: "{{ my_password | password_hash('sha512') }}"
+
+- name: Crear un grupo llamado admin
+  group:
+    name: admin
+    state: present
+
+
+- name: Crear un usuario devuser perteneciente al grupo admin con contraseña cifrada
+  user:
+    name: devuser
+    shell: /bin/bash
+    group: admin
+    password: "{{ 'my_password' | password_hash('sha512') }}"

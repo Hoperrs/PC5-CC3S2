@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
 
 
   # red privada con ip estática
-  config.vm.network "private_network", ip: "192.168.56.0"
+  config.vm.network "private_network", ip: "192.168.56.50"
 
 
   # provisión con Ansible usando el playbook site.yml

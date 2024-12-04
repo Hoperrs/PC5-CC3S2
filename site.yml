@@ -6,8 +6,10 @@
   remote_user: vagrant
   tasks:
     - import_tasks: ansible/ejercicio1/main.yml
-    # - import_tasks: ansible/ejercicio2/main.yml
-    # - import_tasks: ansible/ejercicio3/main.yml
+    - import_tasks: ansible/ejercicio2/main.yml
+    - import_tasks: ansible/ejercicio3/main.yml
     # - import_tasks:
     # - import_tasks:
     # - import_tasks:clea
+  handlers:
+    - import_tasks: handlers/reiniciar_nginx.yml
