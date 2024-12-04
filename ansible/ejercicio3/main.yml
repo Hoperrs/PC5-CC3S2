@@ -1,21 +1,39 @@
 ---
 - name: Instalar dependencias de Python
   apt:
-    name: python3-pip
+    name:
+      - python3
+      - python3-pip
     state: present
+
 
 - name: Instalar Flask y Gunicorn
   pip:
-    update_cache: yes
     name:
-      - Flask
-      - Gunicorn
-    state: present
+      - flask
+      - gunicorn
+    executable: pip3
 
 
-- name: Configurar Nginx para utilizar SSL
-  
+- name: Crear directorio y copiar la aplicación Flask
+  block:
+    - name: Crear directorio de la aplicación
+      file:
+        path: /opt/engineering
+        state: directory
+        mode: '0750'
+        owner: devuser
+        group: admin
 
+    - name: Copiar la aplicación Flask
+      copy:
+        src: "{{ item }}"
+        dest: "/opt/engineering/"
+        mode: '0750'
+        owner: devuser
+        group: admin
+      loop:
+        - files/greeting.py
+        - files/wsgi.py
 
-- name: Habilitar y configurar el firewall UFW para permitir tráfico en los puertos necesarios
   
